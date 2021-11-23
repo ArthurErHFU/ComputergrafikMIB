@@ -22,7 +22,8 @@ namespace FuseeApp
         public override void Init()
         {
             // Set the clear color for the backbuffer to "greenery"
-            RC.ClearColor = (float4) ColorUint.Greenery;
+            float4 colorGradiant = new float4(1,1,1,1);
+            RC.ClearColor = colorGradiant;
         }
 
         // RenderAFrame is called once a frame
