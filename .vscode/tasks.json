@@ -42,7 +42,7 @@
             "command": "fusee",
             "args": [
                 "pack",
-                "bin/Debug/Tut08_FirstSteps.dll"
+                "bin/Debug/_08Fusse.dll"
             ],
             "group": "build",
             "presentation": {
@@ -61,7 +61,7 @@
             "args": [
                 "publish",
                 "-p", "Desktop",
-                "-i", "bin/Debug/Tut08_FirstSteps.dll",
+                "-i", "bin/Debug/_08Fusse.dll",
                 "-o", "${workspaceFolder}/pub/exe"
             ],
             "type": "shell",
@@ -82,7 +82,7 @@
             "args": [
                 "publish",
                 "-p", "Web",
-                "-i", "bin/Debug/Tut08_FirstSteps.dll",
+                "-i", "bin/Debug/_08Fusse.dll",
                 "-o", "${workspaceFolder}/pub/web"
             ],
             "type": "shell",
