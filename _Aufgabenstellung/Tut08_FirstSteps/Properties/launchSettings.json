@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "Tut08_FirstSteps": {
-      "commandName": "Executable",
-      "executablePath": "fusee",
-      "commandLineArgs": "player $(TargetPath)"
-    }
-  }
-}

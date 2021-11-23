@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "_08Fusse": {
+      "commandName": "Executable",
+      "executablePath": "fusee",
+      "commandLineArgs": "player $(TargetPath)"
+    }
+  }
+}
