@@ -18,23 +18,42 @@ namespace FuseeApp
     [FuseeApplication(Name = "Tut08_FirstSteps", Description = "Yet another FUSEE App.")]
     public class Tut08_FirstSteps : RenderCanvas
     {
+
+        private SceneContainer _scene;
+        private SceneRendererForward _sceneRenderer;
         // Init is called on startup. 
         public override void Init()
         {
             // Set the clear color for the backbuffer to "greenery"
-            float4 colorGradiant = new float4(1,1,1,1);
-            RC.ClearColor = colorGradiant;
+            RC.ClearColor = new float4(0.5f, 0.5f, 0.5f, 1);
+
+            //Verwaltungs kram...
+            _scene = new SceneContainer();
+            SceneNode cube = new SceneNode();
+            var cubeTranform = new Transform(new float3(0, 0, 0), new float3(0, 0, 0), new float(1, 1, 1));
+            // var cubeSahder = 
+            // var cubeMesh  =
+
+            cube.AddComponent(cubeTranform);
+            cube.AddComponent(cubeSahder);
+            cube.AddComponent(cubeMesh);
+
+            _scene.Children.Add(cube);
+
+            -sceneRendere = new SceneRendererForward(_scene);
         }
 
         // RenderAFrame is called once a frame
         public override void RenderAFrame()
         {
             SetProjectionAndViewport();
+            
 
             // Clear the backbuffer
+
             RC.Clear(ClearFlags.Color | ClearFlags.Depth);
 
-           // Swap buffers: Show the contents of the backbuffer (containing the currently rendered frame) on the front buffer.
+            // Swap buffers: Show the contents of the backbuffer (containing the currently rendered frame) on the front buffer.
             Present();
         }
 
@@ -51,7 +70,7 @@ namespace FuseeApp
             // Back clipping happens at 2000 (Anything further away from the camera than 2000 world units gets clipped, polygons will be cut)
             var projection = float4x4.CreatePerspectiveFieldOfView(M.PiOver4, aspectRatio, 1, 20000);
             RC.Projection = projection;
-        }        
+        }
 
     }
 }
