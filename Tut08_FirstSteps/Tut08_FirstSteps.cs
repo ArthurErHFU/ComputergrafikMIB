@@ -21,33 +21,27 @@ namespace FuseeApp
 
         private SceneContainer _scene;
         private SceneRendererForward _sceneRenderer;
+        private Transform _cubeTransform;
         // Init is called on startup. 
         public override void Init()
         {
             // Set the clear color for the backbuffer to "greenery"
-            RC.ClearColor = new float4(0.5f, 0.5f, 0.5f, 1);
+            RC.ClearColor = new float4(1f, 1f, 1f, 1f);
 
-            //Verwaltungs kram...
-            _scene = new SceneContainer();
-            SceneNode cube = new SceneNode();
-            var cubeTranform = new Transform(new float3(0, 0, 0), new float3(0, 0, 0), new float(1, 1, 1));
-            // var cubeSahder = 
-            // var cubeMesh  =
+            // Create a scene with a cube
+            // The three components: one Transform, one ShaderEffect (blue material) and the Mesh
+            _cubeTransform = new Transform { Translation = new float3(0f, 0f, 50f) };
 
-            cube.AddComponent(cubeTranform);
-            cube.AddComponent(cubeSahder);
-            cube.AddComponent(cubeMesh);
+            var cubeShader = MakeEffect.FromDiffuseSpecular((float4)ColorUint.YellowGreen);
+            var cubeMesh = SimpleMeshes.CreateCuboid(new float3(10f, 10f, 10f));
 
-            _scene.Children.Add(cube);
-
-            -sceneRendere = new SceneRendererForward(_scene);
         }
 
         // RenderAFrame is called once a frame
         public override void RenderAFrame()
         {
             SetProjectionAndViewport();
-            
+
 
             // Clear the backbuffer
 
