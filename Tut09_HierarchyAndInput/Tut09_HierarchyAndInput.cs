@@ -50,8 +50,9 @@ namespace FuseeApp
         private float grapOpen = 45f;
         private float grapClose = -2f;
         private float grapRot = 1f;
+        private float grapActualSpeed = 0;
 
-        private bool grapStatusKey = false;
+        private bool grapISclosing = false;
 
 
         SceneContainer CreateScene()
@@ -296,18 +297,30 @@ namespace FuseeApp
             //grapOpen => 45f
             //grapClose => -2f
             //grapRot = openGrap(_grapple2Pivot, grapOpen);
-            grapRot = closeGrap(_grapple2Pivot, grapClose);
+            //grapRot = closeGrap(_grapple2Pivot, grapClose);
 
+            grapRot = closeGrap(_grapple2Pivot, grapClose);
             //KEY PRESS
 
-            if (Keyboard.IsKeyDown(KeyCodes.NumPad5) && grapRot < 0) //grapStatus
+            if (Keyboard.IsKeyDown(KeyCodes.NumPad5))
             {
-
+                if (grapISclosing)
+                {
+                    grapISclosing = false;
+                }
+                else
+                {
+                    grapISclosing = true;
+                }
             }
 
-            else if (Keyboard.IsKeyDown(KeyCodes.NumPad5) && grapRot > 0)
+            if (!grapISclosing)
             {
-                grapRot = -50f;
+                grapRot = openGrap(_grapple2Pivot, grapOpen);
+            }
+            else if (grapISclosing)
+            {
+                grapRot = closeGrap(_grapple2Pivot, grapClose);
             }
 
             //armParts
@@ -345,33 +358,35 @@ namespace FuseeApp
 
         private float openGrap(Transform _grapple2Pivot, float grapOpen)
         {
-            //speed
+            //maxspeed -> -50f
             //lerpValues
             if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) <= grapOpen)
             {
                 //Open
-                return -50f;
+                grapActualSpeed = M.Lerp(grapActualSpeed, -50f, lerpValue + 0.3f);
+
             }
-            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapOpen) //-2f
+            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapOpen) //grapOpen = 45f
             {
                 //stops
-                return 0f;
+                grapActualSpeed = M.Lerp(grapActualSpeed, 0f, lerpValue + 0.3f);
+
             }
-            return 0f;
+            return grapActualSpeed;
         }
         private float closeGrap(Transform _grapple2Pivot, float grapClose)
         {
             //speed
             //lerpValues
-            if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) <= grapClose) //TODO: Abfrage richtig machen!
+            if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapClose) //grapClose = -2f;
             {
                 //Open
-                return 50f;
+                grapActualSpeed = M.Lerp(grapActualSpeed, 50f, lerpValue + 0.3f);
             }
-            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapClose)
+            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) <= grapClose)
             {
                 //stops
-                return 0f;
+                grapActualSpeed = M.Lerp(grapActualSpeed, 0f, lerpValue + 0.3f);
             }
             return 0f;
         }
