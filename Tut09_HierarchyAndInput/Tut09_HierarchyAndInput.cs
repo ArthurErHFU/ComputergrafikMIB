@@ -30,14 +30,36 @@ namespace FuseeApp
         private Transform _lowerArmPivot;
         private Transform _lowerArmTransform;
 
-        //rotation nad lerp falues
-        private float3 lerpValue = new float3(0, 0, 0);
-        private float3 rotSpeed = new float3(0, 0, 0);
+        private Transform _grapple1Transform;
+        private Transform _grapple1Pivot;
+
+        private Transform _grapple2Transform;
+        private Transform _grapple2Pivot;
+
+        //rotation and lerp falues
+        private float lerpValue = 0.1f;
+
+        private float bodyRot = 0f;
+        private float upperRot = 0f;
+        private float lowerRot = 0f;
+
+        private float rotSpeed = 3f;
+
+
+        //GrappleValues
+        private float grapOpen = 45f;
+        private float grapClose = -2f;
+        private float grapRot = 1f;
+
+        private bool grapStatusKey = false;
+
 
         SceneContainer CreateScene()
         {
             // Initialize nCuboid shape
             float3 shape = new float3(2, 10, 2);
+            // Initialize GrappleCuboid shape
+            float3 gPshape = new float3(1, 4, 1);
             // Initialize transform components that need to be changed inside "RenderAFrame"
             _baseTransform = new Transform
             {
@@ -74,6 +96,30 @@ namespace FuseeApp
                 Rotation = new float3(0, 0, 0),
                 Scale = new float3(1, 1, 1),
                 Translation = new float3(0, 4, 0)
+            };
+            _grapple1Transform = new Transform
+            {
+                Rotation = new float3(0, 0, 0),
+                Scale = new float3(1, 1, 1),
+                Translation = new float3(0, 2, 0)
+            };
+            _grapple1Pivot = new Transform
+            {
+                Rotation = new float3(0, 0, M.DegreesToRadians(-45)),//45
+                Scale = new float3(1, 1, 1),
+                Translation = new float3(1, 5, 0)
+            };
+            _grapple2Transform = new Transform
+            {
+                Rotation = new float3(0, 0, 0),
+                Scale = new float3(1, 1, 1),
+                Translation = new float3(0, 2, 0)
+            };
+            _grapple2Pivot = new Transform
+            {
+                Rotation = new float3(0, 0, M.DegreesToRadians(45)),//45
+                Scale = new float3(1, 1, 1),
+                Translation = new float3(-1, 5, 0)
             };
 
             // Setup the scene graph
@@ -143,6 +189,22 @@ namespace FuseeApp
                                                                 _lowerArmTransform,
                                                                 MakeEffect.FromDiffuseSpecular((float4) ColorUint.Blue),
                                                                 SimpleMeshes.CreateCuboid(shape)
+                                                            },
+                                                            Children = new ChildList{
+                                                                new SceneNode{
+                                                                    Components = new List<SceneComponent>{
+                                                                        _grapple1Pivot,
+                                                                        MakeEffect.FromDiffuseSpecular((float4) ColorUint.Greenery),
+                                                                        SimpleMeshes.CreateCuboid(gPshape)
+                                                                    }
+                                                                },
+                                                                new SceneNode{
+                                                                    Components = new List<SceneComponent>{
+                                                                        _grapple2Pivot,
+                                                                        MakeEffect.FromDiffuseSpecular((float4) ColorUint.Greenery),
+                                                                        SimpleMeshes.CreateCuboid(gPshape)
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -183,54 +245,80 @@ namespace FuseeApp
             RC.View = float4x4.CreateTranslation(0, -10, 50) * float4x4.CreateRotationY(_camAngle);
             //My Stuff  -->DeltaTime
             //BSP:
-            float bodyRot = _bodyTransform.Rotation.y;
-            float upperRot = _upperArmPivot.Rotation.x;
-            float lowerRot = _lowerArmPivot.Rotation.x;
+
 
             if (Keyboard.GetKey(KeyCodes.NumPad4))
             {
-                bodyRot += 1f * Time.DeltaTime;
+                bodyRot = M.Lerp(bodyRot, rotSpeed, lerpValue);
+
             }
+
             else if (Keyboard.GetKey(KeyCodes.NumPad6))
             {
-                bodyRot -= 1f * Time.DeltaTime;
+                bodyRot = M.Lerp(bodyRot, -rotSpeed, lerpValue);
             }
+
             else
             {
-                //LERP
+                bodyRot = M.Lerp(bodyRot, 0, lerpValue);
             }
 
             if (Keyboard.GetKey(KeyCodes.NumPad7))
             {
-                upperRot += 1f * Time.DeltaTime;
+                upperRot = M.Lerp(upperRot, rotSpeed, lerpValue);
             }
+
             else if (Keyboard.GetKey(KeyCodes.NumPad1))
             {
-                upperRot -= 1f * Time.DeltaTime;
+                upperRot = M.Lerp(upperRot, -rotSpeed, lerpValue);
             }
+
             else
             {
-                //LERP
+                upperRot = M.Lerp(upperRot, 0, lerpValue);
             }
 
             if (Keyboard.GetKey(KeyCodes.NumPad9))
             {
-
-                lowerRot += 1f * Time.DeltaTime;
+                lowerRot = M.Lerp(lowerRot, rotSpeed, lerpValue);
             }
+
             else if (Keyboard.GetKey(KeyCodes.NumPad3))
             {
-                lowerRot -= 1f * Time.DeltaTime;
+                lowerRot = M.Lerp(lowerRot, -rotSpeed, lerpValue);
             }
+
             else
             {
-                //LERP
+                lowerRot = M.Lerp(lowerRot, 0, lerpValue);
             }
 
+            //grapOpen => 45f
+            //grapClose => -2f
+            //grapRot = openGrap(_grapple2Pivot, grapOpen);
+            grapRot = closeGrap(_grapple2Pivot, grapClose);
 
-            _bodyTransform.Rotation = new float3(0, bodyRot, 0);
-            _upperArmPivot.Rotation = new float3(upperRot, 0, 0);
-            _lowerArmPivot.Rotation = new float3(lowerRot, 0, 0);
+            //KEY PRESS
+
+            if (Keyboard.IsKeyDown(KeyCodes.NumPad5) && grapRot < 0) //grapStatus
+            {
+
+            }
+
+            else if (Keyboard.IsKeyDown(KeyCodes.NumPad5) && grapRot > 0)
+            {
+                grapRot = -50f;
+            }
+
+            //armParts
+            _bodyTransform.Rotation += new float3(0, bodyRot * Time.DeltaTime, 0);
+            _upperArmPivot.Rotation += new float3(upperRot * Time.DeltaTime, 0, 0);
+            _lowerArmPivot.Rotation += new float3(lowerRot * Time.DeltaTime, 0, 0);
+
+            //Grapple stuff
+            _grapple1Pivot.Rotation += new float3(0, 0, M.DegreesToRadians(grapRot) * Time.DeltaTime);
+            _grapple2Pivot.Rotation += new float3(0, 0, M.DegreesToRadians(-grapRot) * Time.DeltaTime);
+
             //END_BSP
 
             // Render the scene on the current render context
@@ -254,5 +342,40 @@ namespace FuseeApp
             var projection = float4x4.CreatePerspectiveFieldOfView(M.PiOver4, aspectRatio, 1, 20000);
             RC.Projection = projection;
         }
+
+        private float openGrap(Transform _grapple2Pivot, float grapOpen)
+        {
+            //speed
+            //lerpValues
+            if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) <= grapOpen)
+            {
+                //Open
+                return -50f;
+            }
+            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapOpen) //-2f
+            {
+                //stops
+                return 0f;
+            }
+            return 0f;
+        }
+        private float closeGrap(Transform _grapple2Pivot, float grapClose)
+        {
+            //speed
+            //lerpValues
+            if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) <= grapClose) //TODO: Abfrage richtig machen!
+            {
+                //Open
+                return 50f;
+            }
+            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapClose)
+            {
+                //stops
+                return 0f;
+            }
+            return 0f;
+        }
     }
+
+
 }
