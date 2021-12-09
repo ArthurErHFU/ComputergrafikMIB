@@ -30,6 +30,10 @@ namespace FuseeApp
         private Transform _lowerArmPivot;
         private Transform _lowerArmTransform;
 
+        //rotation nad lerp falues
+        private float3 lerpValue = new float3(0, 0, 0);
+        private float3 rotSpeed = new float3(0, 0, 0);
+
         SceneContainer CreateScene()
         {
             // Initialize nCuboid shape
@@ -142,15 +146,12 @@ namespace FuseeApp
                                                             }
                                                         }
                                                     }
-
                                                 }
                                             }
                                         }
                                     }
                                 }
-
                             }
-
                         }
                 }
             };
@@ -183,9 +184,53 @@ namespace FuseeApp
             //My Stuff  -->DeltaTime
             //BSP:
             float bodyRot = _bodyTransform.Rotation.y;
-            bodyRot += 1f * Keyboard.LeftRightAxis;
-            _upperArmPivot.Rotation = new float3(bodyRot, 0, 0);
-            _lowerArmPivot.Rotation = new float3(bodyRot, 0, 0);
+            float upperRot = _upperArmPivot.Rotation.x;
+            float lowerRot = _lowerArmPivot.Rotation.x;
+
+            if (Keyboard.GetKey(KeyCodes.NumPad4))
+            {
+                bodyRot += 1f * Time.DeltaTime;
+            }
+            else if (Keyboard.GetKey(KeyCodes.NumPad6))
+            {
+                bodyRot -= 1f * Time.DeltaTime;
+            }
+            else
+            {
+                //LERP
+            }
+
+            if (Keyboard.GetKey(KeyCodes.NumPad7))
+            {
+                upperRot += 1f * Time.DeltaTime;
+            }
+            else if (Keyboard.GetKey(KeyCodes.NumPad1))
+            {
+                upperRot -= 1f * Time.DeltaTime;
+            }
+            else
+            {
+                //LERP
+            }
+
+            if (Keyboard.GetKey(KeyCodes.NumPad9))
+            {
+
+                lowerRot += 1f * Time.DeltaTime;
+            }
+            else if (Keyboard.GetKey(KeyCodes.NumPad3))
+            {
+                lowerRot -= 1f * Time.DeltaTime;
+            }
+            else
+            {
+                //LERP
+            }
+
+
+            _bodyTransform.Rotation = new float3(0, bodyRot, 0);
+            _upperArmPivot.Rotation = new float3(upperRot, 0, 0);
+            _lowerArmPivot.Rotation = new float3(lowerRot, 0, 0);
             //END_BSP
 
             // Render the scene on the current render context
