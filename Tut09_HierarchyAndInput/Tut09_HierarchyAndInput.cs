@@ -49,11 +49,15 @@ namespace FuseeApp
         //GrappleValues
         private float grapOpen = 45f;
         private float grapClose = -2f;
-        private float grapRot = 1f;
+        private float grapRot = 0f;
         private float grapActualSpeed = 0;
 
         private bool grapISclosing = false;
 
+
+        //CamValues
+        private float camRot = 0;
+        private float camSpeed = 0.01f;
 
         SceneContainer CreateScene()
         {
@@ -106,9 +110,9 @@ namespace FuseeApp
             };
             _grapple1Pivot = new Transform
             {
-                Rotation = new float3(0, 0, M.DegreesToRadians(-45)),//45
+                Rotation = new float3(0, 0, M.DegreesToRadians(-45)),//-45
                 Scale = new float3(1, 1, 1),
-                Translation = new float3(1, 5, 0)
+                Translation = new float3(1, 4, 0)
             };
             _grapple2Transform = new Transform
             {
@@ -120,7 +124,7 @@ namespace FuseeApp
             {
                 Rotation = new float3(0, 0, M.DegreesToRadians(45)),//45
                 Scale = new float3(1, 1, 1),
-                Translation = new float3(-1, 5, 0)
+                Translation = new float3(-1, 4, 0)
             };
 
             // Setup the scene graph
@@ -185,7 +189,7 @@ namespace FuseeApp
                                                     {
                                                         new SceneNode
                                                         {
-                                                            Components= new List<SceneComponent>
+                                                            Components = new List<SceneComponent>
                                                             {
                                                                 _lowerArmTransform,
                                                                 MakeEffect.FromDiffuseSpecular((float4) ColorUint.Blue),
@@ -195,15 +199,34 @@ namespace FuseeApp
                                                                 new SceneNode{
                                                                     Components = new List<SceneComponent>{
                                                                         _grapple1Pivot,
-                                                                        MakeEffect.FromDiffuseSpecular((float4) ColorUint.Greenery),
-                                                                        SimpleMeshes.CreateCuboid(gPshape)
+
+                                                                    },
+                                                                    Children = new ChildList{
+                                                                        new SceneNode{
+
+                                                                        Components = new List<SceneComponent>{
+
+                                                                            _grapple1Transform,
+                                                                            MakeEffect.FromDiffuseSpecular((float4) ColorUint.Greenery),
+                                                                            SimpleMeshes.CreateCuboid(gPshape)
+                                                                            }
+                                                                        }
                                                                     }
                                                                 },
                                                                 new SceneNode{
                                                                     Components = new List<SceneComponent>{
                                                                         _grapple2Pivot,
-                                                                        MakeEffect.FromDiffuseSpecular((float4) ColorUint.Greenery),
-                                                                        SimpleMeshes.CreateCuboid(gPshape)
+                                                                    },
+                                                                    Children = new ChildList{
+                                                                        new SceneNode{
+
+                                                                        Components = new List<SceneComponent>{
+
+                                                                            _grapple2Transform,
+                                                                            MakeEffect.FromDiffuseSpecular((float4) ColorUint.Greenery),
+                                                                            SimpleMeshes.CreateCuboid(gPshape)
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -247,6 +270,15 @@ namespace FuseeApp
             //My Stuff  -->DeltaTime
             //BSP:
 
+
+            if (Mouse.LeftButton)
+            {
+                camRot = Mouse.Velocity.x * camSpeed * Time.DeltaTime;
+            }
+            else
+            {
+                camRot = M.Lerp(camRot, 0f, 0.05f);
+            }
 
             if (Keyboard.GetKey(KeyCodes.NumPad4))
             {
@@ -304,24 +336,18 @@ namespace FuseeApp
 
             if (Keyboard.IsKeyDown(KeyCodes.NumPad5))
             {
-                if (grapISclosing)
-                {
-                    grapISclosing = false;
-                }
-                else
-                {
-                    grapISclosing = true;
-                }
+                grapISclosing = !grapISclosing;
             }
 
-            if (!grapISclosing)
-            {
-                grapRot = openGrap(_grapple2Pivot, grapOpen);
-            }
-            else if (grapISclosing)
+            if (grapISclosing)
             {
                 grapRot = closeGrap(_grapple2Pivot, grapClose);
             }
+            else
+            {
+                grapRot = openGrap(_grapple2Pivot, grapOpen);
+            }
+
 
             //armParts
             _bodyTransform.Rotation += new float3(0, bodyRot * Time.DeltaTime, 0);
@@ -331,6 +357,8 @@ namespace FuseeApp
             //Grapple stuff
             _grapple1Pivot.Rotation += new float3(0, 0, M.DegreesToRadians(grapRot) * Time.DeltaTime);
             _grapple2Pivot.Rotation += new float3(0, 0, M.DegreesToRadians(-grapRot) * Time.DeltaTime);
+
+            _camAngle -= camRot;
 
             //END_BSP
 
@@ -358,37 +386,46 @@ namespace FuseeApp
 
         private float openGrap(Transform _grapple2Pivot, float grapOpen)
         {
+            //grapClose = -2f;
+            //grapOpen = 45f
+
             //maxspeed -> -50f
             //lerpValues
             if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) <= grapOpen)
             {
-                //Open
-                grapActualSpeed = M.Lerp(grapActualSpeed, -50f, lerpValue + 0.3f);
+                //Open -->ther is something not right -100f?
+                grapActualSpeed = M.Lerp(grapActualSpeed, -100f, lerpValue + 0.3f);
+
 
             }
-            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapOpen) //grapOpen = 45f
+            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) > grapClose)
+            {
+                //stops
+                grapActualSpeed = M.Lerp(grapActualSpeed, 0f, lerpValue + 0.3f);
+
+
+            }
+            return grapActualSpeed;
+        }
+
+
+        private float closeGrap(Transform _grapple2Pivot, float grapClose)
+        {
+            //speed
+            //lerpValues
+            if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapClose)
+            {
+                //Close
+                grapActualSpeed = M.Lerp(grapActualSpeed, 50f, lerpValue + 0.3f);
+
+            }
+            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) < grapOpen)
             {
                 //stops
                 grapActualSpeed = M.Lerp(grapActualSpeed, 0f, lerpValue + 0.3f);
 
             }
             return grapActualSpeed;
-        }
-        private float closeGrap(Transform _grapple2Pivot, float grapClose)
-        {
-            //speed
-            //lerpValues
-            if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) >= grapClose) //grapClose = -2f;
-            {
-                //Open
-                grapActualSpeed = M.Lerp(grapActualSpeed, 50f, lerpValue + 0.3f);
-            }
-            else if (M.RadiansToDegrees(_grapple2Pivot.Rotation.z) <= grapClose)
-            {
-                //stops
-                grapActualSpeed = M.Lerp(grapActualSpeed, 0f, lerpValue + 0.3f);
-            }
-            return 0f;
         }
     }
 
