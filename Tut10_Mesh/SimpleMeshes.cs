@@ -141,11 +141,34 @@ namespace FuseeApp
 
             float3[] verts = new float3[segments + 1];
             float3[] norms = new float3[segments + 1];
-            ushort[] tris = new ushort[segments];
+            ushort[] tris = new ushort[segments * 3 + 3];
+
+
+            //Bottom faces!
+            for (int i = 0; i < segments; i++)
+            {
+                verts[i] = new float3(radius * M.Cos(i * alpha), 0, radius * M.Sin(i * alpha));
+                norms[i] = new float3(0, 1, 0);
+
+                tris[i * 3 + 0] = (ushort)(i - 1);
+                tris[i * 3 + 1] = (ushort)i;
+                tris[i * 3 + 2] = (ushort)segments;
+            }
+            //last part --> not needed overlaps!
+            /*
+            verts[segments] = new float3(radius * M.Cos(segments * alpha), 0, radius * M.Sin(segments * alpha));
+            norms[segments] = new float3(0, 1, 0);
+            */
+            //last triangle
+            tris[segments * 3 + 0] = (ushort)(segments - 1);
+            tris[segments * 3 + 1] = (ushort)0;
+            tris[segments * 3 + 2] = (ushort)(segments);
 
             return new Mesh
             {
-
+                Vertices = verts,
+                Normals = norms,
+                Triangles = tris,
             };
         }
 

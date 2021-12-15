@@ -48,6 +48,7 @@ namespace FuseeApp
                             SimpleMeshes.MakeMaterial((float4) ColorUint.LightGrey),
 
                             // MESH COMPONENT
+                            //size hight segments
                             SimpleMeshes.CreateCylinder(4,10,3)
                         }
                     },
