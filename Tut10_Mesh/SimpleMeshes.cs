@@ -10,7 +10,7 @@ using Fusee.Serialization;
 
 namespace FuseeApp
 {
-    public static class SimpleMeshes 
+    public static class SimpleMeshes
     {
         public static Mesh CreateCuboid(float3 size)
         {
@@ -121,7 +121,7 @@ namespace FuseeApp
                     new float2(0, 1),
                     new float2(0, 0)
                 },
-                BoundingBox = new AABBf(-0.5f * size, 0.5f*size)
+                BoundingBox = new AABBf(-0.5f * size, 0.5f * size)
             };
         }
 
@@ -136,7 +136,17 @@ namespace FuseeApp
 
         public static Mesh CreateCylinder(float radius, float height, int segments)
         {
-            return CreateConeFrustum(radius, radius, height, segments);
+            // conter clock wise segments rotation
+            float alpha = 2 * M.Pi / segments;
+
+            float3[] verts = new float3[segments + 1];
+            float3[] norms = new float3[segments + 1];
+            ushort[] tris = new ushort[segments];
+
+            return new Mesh
+            {
+
+            };
         }
 
         public static Mesh CreateCone(float radius, float height, int segments)

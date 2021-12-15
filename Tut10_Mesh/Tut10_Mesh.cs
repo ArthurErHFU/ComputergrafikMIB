@@ -48,7 +48,7 @@ namespace FuseeApp
                             SimpleMeshes.MakeMaterial((float4) ColorUint.LightGrey),
 
                             // MESH COMPONENT
-                            SimpleMeshes.CreateCuboid(new float3(10, 10, 10))
+                            SimpleMeshes.CreateCylinder(4,10,3)
                         }
                     },
                 }
@@ -78,7 +78,7 @@ namespace FuseeApp
             RC.Clear(ClearFlags.Color | ClearFlags.Depth);
 
             // Setup the camera 
-            RC.View = float4x4.CreateTranslation(0, 0, 40) * float4x4.CreateRotationX(-(float) Math.Atan(15.0 / 40.0));
+            RC.View = float4x4.CreateTranslation(0, 0, 40) * float4x4.CreateRotationX(-(float)Math.Atan(15.0 / 40.0));
 
             // Render the scene on the current render context
             _sceneRenderer.Render(RC);
@@ -100,6 +100,6 @@ namespace FuseeApp
             // Back clipping happens at 2000 (Anything further away from the camera than 2000 world units gets clipped, polygons will be cut)
             var projection = float4x4.CreatePerspectiveFieldOfView(M.PiOver4, aspectRatio, 1, 20000);
             RC.Projection = projection;
-        }        
+        }
     }
 }
