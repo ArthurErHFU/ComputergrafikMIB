@@ -1,6 +1,10 @@
 
 ## Aufgabe
 
+git status
+git add
+git commit
+
 ### Teil 1
 
 - X ~~Testet den Code für unterschiedliche Werte für `segments` und macht euch klar, dass jeweils nur das letzte Dreieck fehlt.~~
@@ -12,7 +16,7 @@
   die erklären, wie die Array-Inhalte die Geometrie beschreiben.~~
 
 X ~~Hinweise: Die Abgabe muss den Code aus SimpleMeshes.cs enthalten. Scannt/fotografiert Eure Skizze und legt diese der Abgabe als Bild/Pdf hinzu.~~
-![Mein Gedankengang](/LastTri.png) Original als .pur
+![Mein Gedankengang](../LastTri.png) Original als .pur
 
 ### Teil 2
 
