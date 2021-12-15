@@ -16,7 +16,7 @@
   die erklären, wie die Array-Inhalte die Geometrie beschreiben.~~
 
 X ~~Hinweise: Die Abgabe muss den Code aus SimpleMeshes.cs enthalten. Scannt/fotografiert Eure Skizze und legt diese der Abgabe als Bild/Pdf hinzu.~~
-![Mein Gedankengang](../LastTri.png) Original als .pur
+![Mein Gedankengang](../Tut10_Mesh/LastTri.png) Original als .pur
 
 ### Teil 2
 
