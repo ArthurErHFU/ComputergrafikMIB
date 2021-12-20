@@ -136,6 +136,8 @@ namespace FuseeApp
 
         public static Mesh CreateCylinder(float radius, float height, int segments)
         {
+            uHight = height / 2;
+            bHight = -height / 2;
             // conter clock wise segments rotation
             float alpha = 2 * M.Pi / segments;
 

@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj": {}
+  },
+  "projects": {
+    "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj",
+        "projectName": "Tut10_Mesh",
+        "projectPath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj",
+        "packagesPath": "D:\\Users\\Arthur Erlich HFU\\.nuget\\packages\\",
+        "outputPath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "D:\\Users\\Arthur Erlich HFU\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "D:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Fusee.Desktop": {
+              "target": "Package",
+              "version": "[0.11.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
