@@ -195,9 +195,9 @@ namespace FuseeApp
             tris[1][segments * 3 + 2] = (ushort)(segments);
 
             return new Mesh
-            {
 
-                Vertices = vertsOut,
+            {
+                Vertices = verts[1],
                 Normals = norms[1],
                 Triangles = tris[1],
             };
@@ -228,74 +228,75 @@ namespace FuseeApp
         }
 
     }
+
+
+    /*
+    public static Mesh CreateCylinder(float radius, float height, int segments)
+            {
+                float uHight = height / 2;
+                float bHight = -height / 2;
+                // conter clock wise segments rotation
+                float alpha = 2 * M.Pi / segments;
+
+
+                //Double Array Top and Bootom
+                float3[][] verts = new float3[2][];
+                float3[][] norms = new float3[2][];
+                ushort[][] tris = new ushort[2][];
+
+                //Filling the double array 
+                verts[0] = new float3[segments + 1];
+                verts[1] = new float3[segments + 1];
+
+                norms[0] = new float3[segments + 1];
+                norms[1] = new float3[segments + 1];
+
+                tris[0] = new ushort[segments * 3 + 3];
+                tris[1] = new ushort[segments * 3 + 3];
+
+
+
+
+                //Bottom faces!
+                verts[0][segments] = new float3(0, uHight, 0);
+                for (int i = 0; i < segments; i++)
+                {
+                    verts[0][i] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
+                    norms[0][i] = new float3(0, 1, 0);
+
+                    tris[0][i * 3 + 0] = (ushort)(i - 1);
+                    tris[0][i * 3 + 1] = (ushort)i;
+                    tris[0][i * 3 + 2] = (ushort)segments;
+                }
+
+
+                tris[0][segments * 3 + 0] = (ushort)(segments - 1);
+                tris[0][segments * 3 + 1] = (ushort)0;
+                tris[0][segments * 3 + 2] = (ushort)(segments);
+
+                //Upper faces!
+                verts[1][segments] = new float3(0, bHight, 0);
+                for (int i = 0; i < segments; i++)
+                {
+                    verts[1][i] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
+                    norms[1][i] = new float3(0, -1, 0);
+
+                    tris[1][i * 3 + 0] = (ushort)(i - 1);
+                    tris[1][i * 3 + 1] = (ushort)i;
+                    tris[1][i * 3 + 2] = (ushort)segments;
+                }
+
+                tris[1][segments * 3 + 0] = (ushort)(segments - 1);
+                tris[1][segments * 3 + 1] = (ushort)0;
+                tris[1][segments * 3 + 2] = (ushort)(segments);
+
+                return new Mesh
+                {
+
+                    Vertices = vertsOut,
+                    Normals = norms[1],
+                    Triangles = tris[1],
+                };
+            }
+    */
 }
-
-/*
-public static Mesh CreateCylinder(float radius, float height, int segments)
-        {
-            float uHight = height / 2;
-            float bHight = -height / 2;
-            // conter clock wise segments rotation
-            float alpha = 2 * M.Pi / segments;
-
-
-            //Double Array Top and Bootom
-            float3[][] verts = new float3[2][];
-            float3[][] norms = new float3[2][];
-            ushort[][] tris = new ushort[2][];
-
-            //Filling the double array 
-            verts[0] = new float3[segments + 1];
-            verts[1] = new float3[segments + 1];
-
-            norms[0] = new float3[segments + 1];
-            norms[1] = new float3[segments + 1];
-
-            tris[0] = new ushort[segments * 3 + 3];
-            tris[1] = new ushort[segments * 3 + 3];
-
-
-
-
-            //Bottom faces!
-            verts[0][segments] = new float3(0, uHight, 0);
-            for (int i = 0; i < segments; i++)
-            {
-                verts[0][i] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
-                norms[0][i] = new float3(0, 1, 0);
-
-                tris[0][i * 3 + 0] = (ushort)(i - 1);
-                tris[0][i * 3 + 1] = (ushort)i;
-                tris[0][i * 3 + 2] = (ushort)segments;
-            }
-
-
-            tris[0][segments * 3 + 0] = (ushort)(segments - 1);
-            tris[0][segments * 3 + 1] = (ushort)0;
-            tris[0][segments * 3 + 2] = (ushort)(segments);
-
-            //Upper faces!
-            verts[1][segments] = new float3(0, bHight, 0);
-            for (int i = 0; i < segments; i++)
-            {
-                verts[1][i] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
-                norms[1][i] = new float3(0, -1, 0);
-
-                tris[1][i * 3 + 0] = (ushort)(i - 1);
-                tris[1][i * 3 + 1] = (ushort)i;
-                tris[1][i * 3 + 2] = (ushort)segments;
-            }
-
-            tris[1][segments * 3 + 0] = (ushort)(segments - 1);
-            tris[1][segments * 3 + 1] = (ushort)0;
-            tris[1][segments * 3 + 2] = (ushort)(segments);
-
-            return new Mesh
-            {
-
-                Vertices = vertsOut,
-                Normals = norms[1],
-                Triangles = tris[1],
-            };
-        }
-/*
