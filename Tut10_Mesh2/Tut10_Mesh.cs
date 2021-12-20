@@ -61,7 +61,7 @@ namespace FuseeApp
         {
             // Set the clear color for the backbuffer to white (100% intensity in all color channels R, G, B, A).
             RC.ClearColor = new float4(0.8f, 0.9f, 0.7f, 1);
-
+            RC.SetRenderState(RenderState.FillMode, (uint)FillMode.Wireframe, true);
             _scene = CreateScene();
 
             // Create a scene renderer holding the scene above

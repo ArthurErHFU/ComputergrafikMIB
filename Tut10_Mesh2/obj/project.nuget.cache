@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xGtgsun1bdsHV2/t+2BZJwH5l/chEhSPhgsjmvm5d1b0dvi9E2AjRQS4rkPa6AP5mdkYtodItNKx80AzZOzdbg==",
+  "dgSpecHash": "W42PhmQ4Eo4ujqsUQA10YL9X7TSTrgRtFAa1pPxBmuJU7iPW09oo1sv1g9/UbWITK2KA6UPbu1iReeGARJXgdQ==",
   "success": true,
-  "projectFilePath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj",
+  "projectFilePath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh2\\Tut10_Mesh.csproj",
   "expectedPackageFiles": [
     "D:\\Users\\Arthur Erlich HFU\\.nuget\\packages\\fusee.base.common\\0.11.2\\fusee.base.common.0.11.2.nupkg.sha512",
     "D:\\Users\\Arthur Erlich HFU\\.nuget\\packages\\fusee.base.core\\0.11.2\\fusee.base.core.0.11.2.nupkg.sha512",

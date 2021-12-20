@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj": {}
+    "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh2\\Tut10_Mesh.csproj": {}
   },
   "projects": {
-    "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj": {
+    "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh2\\Tut10_Mesh.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj",
+        "projectUniqueName": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh2\\Tut10_Mesh.csproj",
         "projectName": "Tut10_Mesh",
-        "projectPath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\Tut10_Mesh.csproj",
+        "projectPath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh2\\Tut10_Mesh.csproj",
         "packagesPath": "D:\\Users\\Arthur Erlich HFU\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh\\obj\\",
+        "outputPath": "C:\\GitHubDesktop\\APP\\ComputergrafikMIB\\Tut10_Mesh2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "D:\\Users\\Arthur Erlich HFU\\AppData\\Roaming\\NuGet\\NuGet.Config",
