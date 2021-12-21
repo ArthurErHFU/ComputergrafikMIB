@@ -143,63 +143,113 @@ namespace FuseeApp
             float alpha = 2 * M.Pi / segments;
 
 
-            //Double Array Top and Bootom
-            float3[][] verts = new float3[2][];
-            float3[][] norms = new float3[2][];
-            ushort[][] tris = new ushort[2][];
-
-            //Filling the double array 
-            verts[0] = new float3[segments + 1];
-            verts[1] = new float3[segments + 1];
-
-            norms[0] = new float3[segments + 1];
-            norms[1] = new float3[segments + 1];
-
-            tris[0] = new ushort[segments * 3 + 3];
-            tris[1] = new ushort[segments * 3 + 3];
+            //Double Array Top and Bootom  2Flächen + Mantel
+            float3[] verts = new float3[((segments + 1) * 2) + ((segments) * 2)];
+            float3[] norms = new float3[((segments + 1) * 2) + ((segments) * 2)];
+            ushort[] tris = new ushort[((segments * 3) * 2) + 3 + ((segments * 3) * 2) + 3];
 
 
+            //zwischenwert
+            int v = 0; //<-- index wert für die norm>s und die verts
+            int t = 0;// 
 
-
-            //Bottom faces!
-            verts[0][segments] = new float3(0, uHight, 0);
-            for (int i = 0; i < segments; i++)
+            //bottompart
+            for (int i = 0; i < (segments); i++)
             {
-                verts[0][i] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
-                norms[0][i] = new float3(0, 1, 0);
+                verts[v] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
+                norms[v] = new float3(0, 1, 0);
 
-                tris[0][i * 3 + 0] = (ushort)(i - 1);
-                tris[0][i * 3 + 1] = (ushort)i;
-                tris[0][i * 3 + 2] = (ushort)segments;
+                tris[(t) * 3 + 0] = (ushort)(t);
+                if (i < segments - 1)
+                {
+                    tris[(t) * 3 + 2] = (ushort)segments;
+                    tris[(t) * 3 + 1] = (ushort)(t + 1);
+                }
+                else
+                {
+                    //flips last triangle --> let it bee visislbe
+                    tris[(t) * 3 + 1] = (ushort)(0);
+                    tris[(t) * 3 + 2] = (ushort)(t + 1);
+                }
+                t++;
+                v++;
             }
+            verts[v] = new float3(0, uHight, 0);
+            norms[v] = new float3(0, 1, 0);
+            v++;
 
 
-            tris[0][segments * 3 + 0] = (ushort)(segments - 1);
-            tris[0][segments * 3 + 1] = (ushort)0;
-            tris[0][segments * 3 + 2] = (ushort)(segments);
-
-            //Upper faces!
-            verts[1][segments] = new float3(0, bHight, 0);
-            for (int i = 0; i < segments; i++)
+            //bottompart
+            for (int i = 0; i < (segments); i++)
             {
-                verts[1][i] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
-                norms[1][i] = new float3(0, -1, 0);
+                verts[v] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
+                norms[v] = new float3(0, 1, 0);
 
-                tris[1][i * 3 + 0] = (ushort)(i - 1);
-                tris[1][i * 3 + 1] = (ushort)i;
-                tris[1][i * 3 + 2] = (ushort)segments;
+
+                tris[(t) * 3 + 0] = (ushort)(v);
+
+
+                if (i < segments - 1)
+                {
+                    tris[(t) * 3 + 1] = (ushort)(segments * 2 + 1);
+                    tris[(t) * 3 + 2] = (ushort)(v + 1);
+                }
+                else
+                {
+                    //flips last triangle --> let it bee visislbe
+                    tris[(t) * 3 + 2] = (ushort)(segments + 1);
+                    tris[(t) * 3 + 1] = (ushort)(v + 1);
+                }
+                t++;
+                v++;
             }
+            verts[v] = new float3(0, bHight, 0);
+            norms[v] = new float3(0, -1, 0);
+            v++;
 
-            tris[1][segments * 3 + 0] = (ushort)(segments - 1);
-            tris[1][segments * 3 + 1] = (ushort)0;
-            tris[1][segments * 3 + 2] = (ushort)(segments);
+            for (int i = 0; i < (segments); i++)
+            {
+
+                verts[v] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
+                norms[v] = new float3(M.Cos(i * alpha), 0, M.Sin(i * alpha));
+
+                verts[v + segments] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
+                norms[v + segments] = new float3(M.Cos(i * alpha), 0, M.Sin(i * alpha));
+
+
+
+                if (i < (segments - 1))
+                {
+                    //halfFace
+                    tris[t * 3 + 0] = (ushort)(v);
+                    tris[t * 3 + 2] = (ushort)(v + 1);
+                    tris[t * 3 + 1] = (ushort)(v + segments);
+                    //
+                    tris[(t + segments) * 3 + 0] = (ushort)(v + 1);
+                    tris[(t + segments) * 3 + 1] = (ushort)(v + segments);
+                    tris[(t + segments) * 3 + 2] = (ushort)(v + segments + 1);
+
+                }
+                else
+                {
+                    //last twoe pices!
+                }
+                v++;
+                t++;
+            }
+            /*
+                     
+
+
+  */
+
 
             return new Mesh
 
             {
-                Vertices = verts[1],
-                Normals = norms[1],
-                Triangles = tris[1],
+                Vertices = verts,
+                Normals = norms,
+                Triangles = tris,
             };
         }
 
@@ -261,12 +311,12 @@ namespace FuseeApp
                 verts[0][segments] = new float3(0, uHight, 0);
                 for (int i = 0; i < segments; i++)
                 {
-                    verts[0][i] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
-                    norms[0][i] = new float3(0, 1, 0);
+                    verts[0,i] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
+                    norms[0,i] = new float3(0, 1, 0);
 
-                    tris[0][i * 3 + 0] = (ushort)(i - 1);
-                    tris[0][i * 3 + 1] = (ushort)i;
-                    tris[0][i * 3 + 2] = (ushort)segments;
+                    tris[0,i * 3 + 0] = (ushort)(i - 1);
+                    tris[0,i * 3 + 1] = (ushort)i;
+                    tris[0,i * 3 + 2] = (ushort)segments;
                 }
 
 
@@ -278,12 +328,12 @@ namespace FuseeApp
                 verts[1][segments] = new float3(0, bHight, 0);
                 for (int i = 0; i < segments; i++)
                 {
-                    verts[1][i] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
-                    norms[1][i] = new float3(0, -1, 0);
+                    verts[1,i] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
+                    norms[1,i] = new float3(0, -1, 0);
 
-                    tris[1][i * 3 + 0] = (ushort)(i - 1);
-                    tris[1][i * 3 + 1] = (ushort)i;
-                    tris[1][i * 3 + 2] = (ushort)segments;
+                    tris[1,i * 3 + 0] = (ushort)(i - 1);
+                    tris[1,i * 3 + 1] = (ushort)i;
+                    tris[1,i * 3 + 2] = (ushort)segments;
                 }
 
                 tris[1][segments * 3 + 0] = (ushort)(segments - 1);
@@ -298,5 +348,64 @@ namespace FuseeApp
                     Triangles = tris[1],
                 };
             }
+
+------
+            verts[segments] = new float3(0, bHight, 0);
+            for (int i = 0; i < segments; i++)
+            {
+                verts[i] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
+                norms[i] = new float3(0, -1, 0);
+
+                tris[1 i * 3 + 0] = (ushort)(i); // auf -1 achten!
+                tris[i * 3 + 1] = (ushort)(i + 1);
+                if (i == segments)
+                {
+                    tris[i * 3 + 2] = (ushort)0;
+                }
+
+            }
+
+
+-----
+
+ for (int i = 0; i < (segments); i++)
+            {
+
+                if (i <= segments / 2)
+                {
+                    if (i == 0)
+                    {
+                        verts[segments] = new float3(0, uHight, 0);
+                    }
+                    verts[i] = new float3(radius * M.Cos(i * alpha), uHight, radius * M.Sin(i * alpha));
+                    norms[i] = new float3(0, 1, 0);
+
+                }
+                else
+                {
+                    if (i == (segments / 2) + 1)
+                    {
+                        verts[segments] = new float3(0, bHight, 0);
+                    }
+                    verts[i] = new float3(radius * M.Cos(i * alpha), bHight, radius * M.Sin(i * alpha));
+                    norms[i] = new float3(0, -1, 0);
+                }
+
+
+                tris[i * 3 + 0] = (ushort)(i);
+                tris[i * 3 + 1] = (ushort)(i + 1);
+
+                if (i == segments / 2)
+                {
+                    tris[i * 3 + 2] = (ushort)0;
+                }
+                else
+                {
+                    tris[i * 3 + 2] = (ushort)(i + 2);
+                }
+
+            }
     */
+
+
 }

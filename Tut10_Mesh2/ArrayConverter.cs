@@ -33,7 +33,7 @@ namespace FuseeApp
             {
                 for (int z = 0; z <= input.GetUpperBound(1); z++)
                 {
-                    result[write++] = input[i, z];
+                    result[write++] = (ushort)(input[i, z] * z);
                 }
             }
             // Step 3: return the new array.
