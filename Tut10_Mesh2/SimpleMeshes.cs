@@ -146,7 +146,7 @@ namespace FuseeApp
             //Double Array Top and Bootom  2Flächen + Mantel
             float3[] verts = new float3[((segments + 1) * 2) + ((segments) * 2)];
             float3[] norms = new float3[((segments + 1) * 2) + ((segments) * 2)];
-            ushort[] tris = new ushort[((segments * 3) * 2) + 3 + ((segments * 3) * 2) + 3];
+            ushort[] tris = new ushort[((segments * 3) * 2) + ((segments * 3) * 2)];
 
 
             //zwischenwert
@@ -220,6 +220,7 @@ namespace FuseeApp
 
                 if (i < (segments - 1))
                 {
+
                     //halfFace
                     tris[t * 3 + 0] = (ushort)(v);
                     tris[t * 3 + 2] = (ushort)(v + 1);
@@ -232,16 +233,22 @@ namespace FuseeApp
                 }
                 else
                 {
+
                     //last twoe pices!
+                    tris[t * 3 + 0] = (ushort)(v);
+                    tris[t * 3 + 2] = (ushort)(v + 1);
+                    tris[t * 3 + 1] = (ushort)(v + segments);
+
+                    //
+                    //last face not right
+                    tris[(t + segments) * 3 + 0] = (ushort)(v + 1);
+                    tris[(t + segments) * 3 + 1] = (ushort)(v + segments);
+                    tris[(t + segments) * 3 + 2] = (ushort)(v + segments + 1); //--> one to much
+
                 }
                 v++;
                 t++;
             }
-            /*
-                     
-
-
-  */
 
 
             return new Mesh

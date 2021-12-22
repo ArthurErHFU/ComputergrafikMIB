@@ -49,7 +49,7 @@ namespace FuseeApp
 
                             // MESH COMPONENT
                             //size hight segments
-                            SimpleMeshes.CreateCylinder(4,10,30)
+                            SimpleMeshes.CreateCylinder(4,10,3)
                         }
                     },
                 }
