@@ -10,6 +10,10 @@ C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh\obj\Debug\Tut10_Mesh.csproj.Co
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh\obj\Debug\Tut10_Mesh.dll
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh\obj\Debug\ref\Tut10_Mesh.dll
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh\obj\Debug\Tut10_Mesh.pdb
+C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\Tut10_Mesh.deps.json
+C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\Tut10_Mesh.dll
+C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\ref\Tut10_Mesh.dll
+C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\Tut10_Mesh.pdb
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\obj\Debug\Tut10_Mesh.csproj.AssemblyReference.cache
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\obj\Debug\Tut10_Mesh.GeneratedMSBuildEditorConfig.editorconfig
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\obj\Debug\Tut10_Mesh.AssemblyInfoInputs.cache
@@ -18,7 +22,3 @@ C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\obj\Debug\Tut10_Mesh.csproj.C
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\obj\Debug\Tut10_Mesh.dll
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\obj\Debug\ref\Tut10_Mesh.dll
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\obj\Debug\Tut10_Mesh.pdb
-C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\Tut10_Mesh.deps.json
-C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\Tut10_Mesh.dll
-C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\ref\Tut10_Mesh.dll
-C:\GitHubDesktop\APP\ComputergrafikMIB\Tut10_Mesh2\bin\Debug\Tut10_Mesh.pdb
