@@ -24,16 +24,16 @@ X ~~Hinweise: Die Abgabe muss den Code aus SimpleMeshes.cs enthalten. Scannt/fot
 
 ### Einzelschritte
 
-1. X ~~Verändert im bestehenden Code alle Vertex-Koordinaten so, dass diese um `0.5f * height` Einheiten entlang der Y-Achse    nach oben verschoben werden (Mittelpunkt nicht vergessen).
+1. X ~~Verändert im bestehenden Code alle Vertex-Koordinaten so, dass diese um `0.5f * height` Einheiten entlang der Y-Achse    nach oben verschoben werden (Mittelpunkt nicht vergessen).~~
 
 2. X ~~Erweitert die Arrays auf die o.A. Größen und verändert zunächst die Berechnungen der bestehenden Indizes nach
    obigem Schema, so dass nach wie vor nur die obere Deckfläche angelegt wird, allerdings schon an den endgültigen
-   Array-Positionen in `tris`, `norms` und `verts`.
+   Array-Positionen in `tris`, `norms` und `verts`.~~
 
 3. X ~~Fügt Vertices und Dreickslisteneinträge für die untere Deckfläche hinzu. Zur visuellen Kontrolle könnt
-   Ihr den Zylinder um seine X- statt um seine Y-Achse rotieren lassen.
+   Ihr den Zylinder um seine X- statt um seine Y-Achse rotieren lassen.~~
 
-4.  X ~~Fügt Vertices und Dreickslisteneinträge für die Mantelfläche hinzu. 
+4.  X ~~Fügt Vertices und Dreickslisteneinträge für die Mantelfläche hinzu.~~
 
 5. Falls noch nicht geschehen: Fügt das Dreiecksvermaschen für alle Flächen des letzten Segmentes außerhalb der
    Schleife hinzu. (Leider fählt da das letzt segment des Mantels!)
