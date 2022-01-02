@@ -39,8 +39,8 @@ X ~~Hinweise: Die Abgabe muss den Code aus SimpleMeshes.cs enthalten. Scannt/fot
    Schleife hinzu. (Leider fählt da das letzt segment des Mantels!)
 
 
-![Mein Gedankengang](../TUT10_MESH2/img1.jpg)
-![Mein Gedankengang](../TUT10_MESH2/img2.jpg)
+![Mein Gedankengang](../Tut10_Mesh2/img1.jpg)
+![Mein Gedankengang](../Tut10_Mesh2/img2.jpg)
 
 ### Alternativen / Ausblick / Für Fortgeschrittene
 
