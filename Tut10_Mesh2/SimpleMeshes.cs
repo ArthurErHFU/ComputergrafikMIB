@@ -240,7 +240,7 @@ namespace FuseeApp
                     tris[t * 3 + 1] = (ushort)(v + segments);
 
                     //
-                    //last face not right
+                    //last face not right. Just wont get it right --> help?
                     tris[(t + segments) * 3 + 0] = (ushort)(v + 1);
                     tris[(t + segments) * 3 + 1] = (ushort)(v + segments);
                     tris[(t + segments) * 3 + 2] = (ushort)(v + segments + 1); //--> one to much
