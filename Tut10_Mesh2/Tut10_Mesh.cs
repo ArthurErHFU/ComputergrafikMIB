@@ -49,7 +49,7 @@ namespace FuseeApp
 
                             // MESH COMPONENT
                             //size hight segments
-                            SimpleMeshes.CreateCylinder(4,10,3)
+                            SimpleMeshes.CreateCylinder(4,10,4)
                         }
                     },
                 }
@@ -61,7 +61,7 @@ namespace FuseeApp
         {
             // Set the clear color for the backbuffer to white (100% intensity in all color channels R, G, B, A).
             RC.ClearColor = new float4(0.8f, 0.9f, 0.7f, 1);
-            //RC.SetRenderState(RenderState.FillMode, (uint)FillMode.Wireframe, true);
+            RC.SetRenderState(RenderState.FillMode, (uint)FillMode.Wireframe, true);
             //RC.SetRenderState(RenderState.CullMode, Cull.None, true); //<- not working
             _scene = CreateScene();
 
