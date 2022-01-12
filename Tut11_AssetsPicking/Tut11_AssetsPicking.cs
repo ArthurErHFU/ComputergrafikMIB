@@ -22,52 +22,34 @@ namespace FuseeApp
     {
         private SceneContainer _scene;
         private SceneRendererForward _sceneRenderer;
-        private Transform _baseTransform;
 
-        SceneContainer CreateScene()
-        {
-            // Initialize transform components that need to be changed inside "RenderAFrame"
-            _baseTransform = new Transform
-            {
-                Rotation = new float3(0, 0, 0),
-                Scale = new float3(1, 1, 1),
-                Translation = new float3(0, 0, 0)
-            };
 
-            // Setup the scene graph
-            return new SceneContainer
-            {
-                Children = new List<SceneNode>
-                {
-                    new SceneNode
-                    {
-                        Components = new List<SceneComponent>
-                        {
-                            // TRANSFROM COMPONENT
-                            _baseTransform,
+        private Transform _mainPart;
+        private Transform _frontRightTire;
+        private Transform _frontLeftTire;
 
-                            // SHADER EFFECT COMPONENT
-                            SimpleMeshes.MakeMaterial((float4) ColorUint.LightGrey),
-
-                            // MESH COMPONENT
-                            // SimpleAssetsPickinges.CreateCuboid(new float3(10, 10, 10))
-                            SimpleMeshes.CreateCuboid(new float3(10, 10, 10))
-                        }
-                    },
-                }
-            };
-        }
 
         // Init is called on startup. 
         public override void Init()
         {
             RC.ClearColor = new float4(0.8f, 0.9f, 0.7f, 1);
-
-            _scene = CreateScene();
-
+            _scene = AssetStorage.Get<SceneContainer>("rover.fus");
             // Create a scene renderer holding the scene above
             _sceneRenderer = new SceneRendererForward(_scene);
+
+            //apply transforms
+            _mainPart = getTransform("MainPart");
+            _frontRightTire = getTransform("FrontRightTire");
+            _frontLeftTire = getTransform("FrontLeftTire");
+
+
         }
+        //returns scene for Helper class
+        public SceneContainer getScenConteiner()
+        {
+            return _scene;
+        }
+
 
         public override async Task InitAsync()
         {
@@ -79,13 +61,13 @@ namespace FuseeApp
         {
             SetProjectionAndViewport();
 
-            _baseTransform.Rotation = new float3(0, M.MinAngle(TimeSinceStart), 0);
+            _mainPart.Rotation = new float3(0, M.MinAngle(TimeSinceStart / 10), 0);
 
             // Clear the backbuffer
             RC.Clear(ClearFlags.Color | ClearFlags.Depth);
 
             // Setup the camera 
-            RC.View = float4x4.CreateTranslation(0, 0, 40) * float4x4.CreateRotationX(-(float) Math.Atan(15.0 / 40.0));
+            RC.View = float4x4.CreateTranslation(0, 0, 40) * float4x4.CreateRotationX(-(float)Math.Atan(15.0 / 40.0));
 
             // Render the scene on the current render context
             _sceneRenderer.Render(RC);
@@ -107,6 +89,20 @@ namespace FuseeApp
             // Back clipping happens at 2000 (Anything further away from the camera than 2000 world units gets clipped, polygons will be cut)
             var projection = float4x4.CreatePerspectiveFieldOfView(M.PiOver4, aspectRatio, 1, 20000);
             RC.Projection = projection;
-        }                
+        }
+        public Transform getTransform(string name)
+        {
+            return _scene.Children.FindNodes(node => node.Name == name)?.FirstOrDefault()?.GetTransform();
+        }
+        public void pickPos(float clipPos)
+        {
+            //_scene.Children.FindNodes(RC => node.Name == name)?.FirstOrDefault()?.GetTransform();
+        }
+
+        public void getColor(string name)
+        {
+
+        }
     }
+
 }
