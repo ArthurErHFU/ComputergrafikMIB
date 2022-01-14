@@ -51,7 +51,7 @@ namespace FuseeApp
             //apply transforms
             //Tires
             _mainPart = getTransform("MainPart");
-            _frontRightTire = (getTransform("FrontRightTire"));
+            _frontRightTire = getTransform("FrontRightTire");
             _frontLeftTire = getTransform("FrontLeftTire");
             _midTireRight = getTransform("MidTireRight");
             _midTireLeft = getTransform("MidTireLeft");
@@ -119,11 +119,11 @@ namespace FuseeApp
             var projection = float4x4.CreatePerspectiveFieldOfView(M.PiOver4, aspectRatio, 1, 20000);
             RC.Projection = projection;
         }
-        public Transform getTransform(string name)
+        private Transform getTransform(string name)
         {
             return _scene.Children.FindNodes(node => node.Name == name)?.FirstOrDefault()?.GetTransform();
         }
-        public void pickNode()
+        private void pickNode()
         {
             if (Mouse.LeftButton)
             {
@@ -136,34 +136,36 @@ namespace FuseeApp
                 }
             }
         }
-        public void getColor(string name)
+        private void getColor(string name)
         {
 
         }
-        public void driveForword(float speed)
+        private void driveForword(float speed)
         {
             if (Keyboard.GetKey(KeyCodes.W))
             {
-                _frontRightTire.Rotation = new float3(-M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _frontLeftTire.Rotation = new float3(-M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _midTireRight.Rotation = new float3(-M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _midTireLeft.Rotation = new float3(-M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _backRightTire.Rotation = new float3(-M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _backLeftTire.Rotation = new float3(-M.MinAngle(TimeSinceStart * speed), 0, 0);
+                float time = -M.MinAngle(TimeSinceStart);
+                _frontRightTire.Rotation = new float3((time * speed), 0, 0);
+                _frontLeftTire.Rotation = new float3((time * speed), 0, 0);
+                _midTireRight.Rotation = new float3((time * speed), 0, 0);
+                _midTireLeft.Rotation = new float3((time * speed), 0, 0);
+                _backRightTire.Rotation = new float3((time * speed), 0, 0);
+                _backLeftTire.Rotation = new float3((time * speed), 0, 0);
             }
             else if (Keyboard.GetKey(KeyCodes.S))
             {
-                _frontRightTire.Rotation = new float3(M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _frontLeftTire.Rotation = new float3(M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _midTireRight.Rotation = new float3(M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _midTireLeft.Rotation = new float3(M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _backRightTire.Rotation = new float3(M.MinAngle(TimeSinceStart * speed), 0, 0);
-                _backLeftTire.Rotation = new float3(M.MinAngle(TimeSinceStart * speed), 0, 0);
+                float time = M.MinAngle(TimeSinceStart);
+                _frontRightTire.Rotation = new float3((time * speed), 0, 0);
+                _frontLeftTire.Rotation = new float3((time * speed), 0, 0);
+                _midTireRight.Rotation = new float3((time * speed), 0, 0);
+                _midTireLeft.Rotation = new float3((time * speed), 0, 0);
+                _backRightTire.Rotation = new float3((time * speed), 0, 0);
+                _backLeftTire.Rotation = new float3((time * speed), 0, 0);
             }
 
         }
 
-        public void turnLeftRight(float speed)
+        private void turnLeftRight(float speed)
         {
             speed = speed / 100;
             if (Keyboard.GetKey(KeyCodes.D) && (_frontRightWing.Rotation.y <= M.Pi / 2))
@@ -183,6 +185,11 @@ namespace FuseeApp
                 _backLeftWing.Rotation = new float3(0, ((speed + _backLeftWing.Rotation.y) % M.TwoPi), 0);
             }
         }
+        private void rotationSpeed()
+        {
+
+        }
+
 
     }
 
