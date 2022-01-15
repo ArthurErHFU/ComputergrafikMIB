@@ -149,8 +149,8 @@ namespace FuseeApp
                 {
                     if (_currentPick != null)
                     {
-                        //var ef = _currentPick.Node.GetComponent<DefaultSurfaceEffect>();
-                        //ef.SurfaceEffect.Albedo = _oldColor;
+                        // var ef = _currentPick.Node.GetComponent<DefaultSurfaceEffect>();
+                        // ef.SurfaceEffect.Albedo = _oldColor;
                     }
 
                     if (newPick != null)
