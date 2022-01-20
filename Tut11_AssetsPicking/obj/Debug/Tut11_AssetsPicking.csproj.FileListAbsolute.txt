@@ -1,4 +1,5 @@
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\bin\Debug\Assets\rover.fus
+C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\bin\Debug\Assets\rover2.fus
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\bin\Debug\Tut11_AssetsPicking.deps.json
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\bin\Debug\Tut11_AssetsPicking.dll
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\bin\Debug\ref\Tut11_AssetsPicking.dll
@@ -11,4 +12,3 @@ C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\obj\Debug\Tut11_Asset
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\obj\Debug\Tut11_AssetsPicking.dll
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\obj\Debug\ref\Tut11_AssetsPicking.dll
 C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\obj\Debug\Tut11_AssetsPicking.pdb
-C:\GitHubDesktop\APP\ComputergrafikMIB\Tut11_AssetsPicking\bin\Debug\Assets\rover2.fus
