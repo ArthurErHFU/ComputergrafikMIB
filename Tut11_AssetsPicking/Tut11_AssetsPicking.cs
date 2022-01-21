@@ -72,7 +72,6 @@ namespace FuseeApp
             _backLeftWing = getTransform("BackLeftWing");
 
             //Weapon
-
             _cannonBase = getTransform("CannonBase");
             _cannon = getTransform("Cannon");
             //scenepicker
@@ -178,19 +177,19 @@ namespace FuseeApp
                 {
                     if (Keyboard.GetKey(KeyCodes.Up))
                     {
-                        trans.Rotation = new float3((speed * 10 + trans.Rotation.x), trans.Rotation.y, 0);
+                        trans.Rotation = new float3((speed * 10 + trans.Rotation.x), trans.Rotation.y, trans.Rotation.z);
                     }
                     else if (Keyboard.GetKey(KeyCodes.Down))
                     {
-                        trans.Rotation = new float3((-speed * 10 + trans.Rotation.x), trans.Rotation.y, 0);
+                        trans.Rotation = new float3((-speed * 10 + trans.Rotation.x), trans.Rotation.y, trans.Rotation.z);
                     }
                     else if (Keyboard.GetKey(KeyCodes.Left))
                     {
-                        trans.Rotation = new float3(trans.Rotation.x, (speed + trans.Rotation.y), 0);
+                        trans.Rotation = new float3(trans.Rotation.x, (speed + trans.Rotation.y), trans.Rotation.z);
                     }
                     else if (Keyboard.GetKey(KeyCodes.Right))
                     {
-                        trans.Rotation = new float3(trans.Rotation.x, (-speed + trans.Rotation.y), 0);
+                        trans.Rotation = new float3(trans.Rotation.x, (-speed + trans.Rotation.y), trans.Rotation.z);
                     }
                 }
             }
